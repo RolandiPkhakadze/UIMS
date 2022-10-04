@@ -12,6 +12,7 @@ import javax.persistence.*;
 @ToString
 @Entity
 public class Transaction {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_id_gen")
     @SequenceGenerator(name = "transaction_id_gen", sequenceName = "transaction_id_seq", allocationSize = 1)

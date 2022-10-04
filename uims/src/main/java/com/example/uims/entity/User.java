@@ -32,4 +32,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     List<BankAccount> accountList;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    List<Migration> migrationList;
 }
