@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface TransactionRepository extends CrudRepository<Transaction, Long > {
+public interface TransactionRepository extends CrudRepository<Transaction, Long> {
 
     boolean existsById(long id);
     Optional<Transaction> findTransactionById(long id);
