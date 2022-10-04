@@ -13,13 +13,13 @@ import javax.persistence.*;
 @Entity
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "amount_id_gen")
-    @SequenceGenerator(name = "amount_id_gen", sequenceName = "amount_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_id_gen")
+    @SequenceGenerator(name = "transaction_id_gen", sequenceName = "transaction_id_seq", allocationSize = 1)
     private long id;
-    @Column(name = "from_acc_id")
-    private long fromAccId;
-    @Column(name = "to_acc_id")
-    private long toAccId;
+    @Column(name = "from_account_number")
+    private String fromAccountNumber;
+    @Column(name = "to_account_number")
+    private String toAccountNumber;
     @Column(name = "amount")
     private long amount;
     @Column(name = "description")
