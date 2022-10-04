@@ -22,14 +22,19 @@ public class TransactionService {
         return repository.findAll();
     }
 
-    public Transaction findTransactionById(long id) {
+    public Transaction getTransaction(long id) {
         Optional<Transaction> transactionOptional = repository.findTransactionById(id);
         checkOptional(transactionOptional, id);
         return transactionOptional.get();
     }
 
     public String getDescription(long id)  {
-        return findTransactionById(id).getDescription();
+        return getTransaction(id).getDescription();
+    }
+
+
+    public Transaction createTransaction(final Transaction transaction) {
+        return repository.save(transaction);
     }
 
     private void checkOptional(Optional<Transaction> optional, long id) {
