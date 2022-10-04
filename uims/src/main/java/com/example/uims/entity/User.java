@@ -31,8 +31,11 @@ public class User {
     private String password;
     @OneToMany(mappedBy = "user")
     @JsonIgnore
-    List<BankAccount> accountList;
+    private List<BankAccount> accountList;
     @OneToMany(mappedBy = "user")
     @JsonIgnore
-    List<Migration> migrationList;
+    private List<Migration> migrationList;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Conviction> convictionList;
 }
