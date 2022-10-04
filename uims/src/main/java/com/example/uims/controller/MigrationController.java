@@ -21,7 +21,7 @@ public class MigrationController {
     }
 
     @PostMapping
-    public Migration createMigration(Migration migration) {
+    public Migration createMigration(@RequestBody Migration migration) {
         return service.createMigration(migration);
     }
 
@@ -30,8 +30,8 @@ public class MigrationController {
         return service.getMigrationsByUser(userId);
     }
 
-    @GetMapping
-    public Migration getMigrationById(long id) {
+    @GetMapping("{id}")
+    public Migration getMigrationById(@PathVariable long id) {
         return service.getMigrationById(id);
     }
 

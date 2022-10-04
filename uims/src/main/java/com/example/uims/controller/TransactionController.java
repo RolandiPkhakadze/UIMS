@@ -22,7 +22,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public Transaction createTransaction(Transaction transaction) {
+    public Transaction createTransaction(@RequestBody Transaction transaction) {
         return service.createTransaction(transaction);
     }
 
