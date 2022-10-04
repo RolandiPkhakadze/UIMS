@@ -29,12 +29,12 @@ public class TransactionController {
         return service.createTransaction(transaction);
     }
 
-    @GetMapping
+    @GetMapping("/{description}")
     public String getDescription(long id) {
         return service.getDescription(id);
     }
 
-    @GetMapping
+    @GetMapping("/{Tramsaction}")
     public Transaction getTransaction(long id) {
         return service.getTransaction(id);
     }
