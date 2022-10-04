@@ -3,10 +3,7 @@ package com.example.uims.controller;
 import com.example.uims.entity.Transaction;
 import com.example.uims.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/transactions")
@@ -29,13 +26,13 @@ public class TransactionController {
         return service.createTransaction(transaction);
     }
 
-    @GetMapping("/{description}")
-    public String getDescription(long id) {
+    @GetMapping("/description/{id}")
+    public String getDescription(@PathVariable(name = "id") long id) {
         return service.getDescription(id);
     }
 
-    @GetMapping("/{Tramsaction}")
-    public Transaction getTransaction(long id) {
+    @GetMapping("/transaction/{id}")
+    public Transaction getTransaction(@PathVariable(name = "id") long id) {
         return service.getTransaction(id);
     }
 
