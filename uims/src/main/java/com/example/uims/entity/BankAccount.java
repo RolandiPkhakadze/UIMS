@@ -1,9 +1,11 @@
 package com.example.uims.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,4 +27,10 @@ public class BankAccount {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @OneToMany(mappedBy = "fromAccount")
+    @JsonIgnore
+    private List<Transaction> incomingTransactionList;
+    @OneToMany(mappedBy = "toAccount")
+    @JsonIgnore
+    private List<Transaction> outgoingTransactionList;
 }
