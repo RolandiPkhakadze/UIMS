@@ -1,8 +1,10 @@
 package com.example.uims.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,4 +29,7 @@ public class User {
     private String address;
     @Column(name = "password")
     private String password;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    List<BankAccount> accountList;
 }
