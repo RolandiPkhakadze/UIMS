@@ -3,9 +3,14 @@ package com.example.uims.controller;
 import com.example.uims.entity.User;
 import com.example.uims.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+import java.util.ArrayList;
+import java.util.List;
+
+@Controller
 @RequestMapping("/users")
 public class UserController {
 
@@ -16,9 +21,17 @@ public class UserController {
         this.service = service;
     }
 
+//    @GetMapping
+//    public Iterable<User> findAllUsers() {
+//        return service.findAllUsers();
+//    }
+
     @GetMapping
-    public Iterable<User> findAllUsers() {
-        return service.findAllUsers();
+    public String viewUsers(Model model){
+        List<User> users = new ArrayList<>();
+        service.findAllUsers().forEach(users::add);
+        model.addAttribute("allUsers", users);
+        return "view_all_users";
     }
 
     @PostMapping
