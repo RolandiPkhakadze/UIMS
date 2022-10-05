@@ -28,8 +28,6 @@ public class User {
     private String personalNo;
     @Column(name = "address")
     private String address;
-    @Column(name = "password")
-    private String password;
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<BankAccount> accountList;
