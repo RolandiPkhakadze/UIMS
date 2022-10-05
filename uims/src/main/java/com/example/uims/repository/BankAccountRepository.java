@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface BankAccountRepository extends CrudRepository<BankAccount, Long> {
-    List<BankAccount> findBankAccountsByUserId(long userId);
+    List<BankAccount> findBankAccountsByUserPersonalNo(String personalNo);
     Optional<BankAccount> findByAccountNumber(String accountNumber);
 }

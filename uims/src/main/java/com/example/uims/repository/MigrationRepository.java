@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface MigrationRepository extends CrudRepository<Migration, Long> {
     Optional<Migration> findMigrationById(long id);
-    List<Migration> findMigrationsByUserId(long id);
+    List<Migration> findMigrationsByUserPersonalNo(String personalNo);
 }

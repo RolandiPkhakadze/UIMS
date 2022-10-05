@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ConvictionRepository extends CrudRepository<Conviction, Long> {
-    List<Conviction> findConvictionsByUserId(long userId);
+    List<Conviction> findConvictionsByUserPersonalNo(String personalNo);
 }

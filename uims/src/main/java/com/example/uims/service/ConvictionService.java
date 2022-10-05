@@ -19,8 +19,8 @@ public class ConvictionService {
         this.repository = repository;
     }
 
-    public List<Conviction> getAllConvictionsByUserId(final long userId) {
-        return repository.findConvictionsByUserId(userId);
+    public List<Conviction> getAllConvictionsByUserPersonalNo(final String personalNo) {
+        return repository.findConvictionsByUserPersonalNo(personalNo);
     }
 
     public Conviction createConviction(final Conviction conviction) {

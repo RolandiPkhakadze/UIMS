@@ -18,9 +18,9 @@ public class BankAccountController {
         this.service = service;
     }
 
-    @GetMapping("/user/{userId}")
-    public List<BankAccount> getAllBankAccountsByUserId(@PathVariable(name = "userId") final long userId) {
-        return service.getAllBankAccountsByUserId(userId);
+    @GetMapping("/user/{personalNo}")
+    public List<BankAccount> getAllBankAccountsByUserPersonalNo(@PathVariable(name = "personalNo") final String personalNo) {
+        return service.getAllBankAccountsByUserPersonalNo(personalNo);
     }
 
     @PostMapping

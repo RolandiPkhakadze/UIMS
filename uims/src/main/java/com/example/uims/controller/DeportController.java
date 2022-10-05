@@ -18,9 +18,9 @@ public class DeportController {
         this.service = service;
     }
 
-    @GetMapping("/user/{userId}")
-    public List<Deport> getAllDeportByUserId(@PathVariable(name = "userId") final long userId) {
-        return service.getAllDeportsByUserId(userId);
+    @GetMapping("/user/{personalNo}")
+    public List<Deport> getAllDeportByUserPersonalNo(@PathVariable(name = "personalNo") final String personalNo) {
+        return service.getAllDeportsByUserPersonalNo(personalNo);
     }
 
     @PostMapping

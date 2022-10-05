@@ -25,9 +25,9 @@ public class MigrationController {
         return service.createMigration(migration);
     }
 
-    @GetMapping("/userMigrations/{userId}")
-    public List<Migration> getMigrationsByUser(@PathVariable long userId) {
-        return service.getMigrationsByUser(userId);
+    @GetMapping("/userMigrations/{personalNo}")
+    public List<Migration> getMigrationsByUserPersonalNo(@PathVariable final String personalNo) {
+        return service.getMigrationsByUserPersonalNo(personalNo);
     }
 
     @GetMapping("/{id}")

@@ -19,8 +19,8 @@ public class BankAccountService {
         this.repository = repository;
     }
 
-    public List<BankAccount> getAllBankAccountsByUserId(final long userId) {
-        return repository.findBankAccountsByUserId(userId);
+    public List<BankAccount> getAllBankAccountsByUserPersonalNo(final String personalNo) {
+        return repository.findBankAccountsByUserPersonalNo(personalNo);
     }
 
     public BankAccount createBankAccount(final BankAccount bankAccount) {

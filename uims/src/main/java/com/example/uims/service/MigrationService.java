@@ -24,8 +24,8 @@ public class MigrationService {
         return repository.save(migration);
     }
 
-    public List<Migration> getMigrationsByUser(long userId) {
-        return repository.findMigrationsByUserId(userId);
+    public List<Migration> getMigrationsByUserPersonalNo(final String personalNo) {
+        return repository.findMigrationsByUserPersonalNo(personalNo);
     }
 
     public Migration getMigrationById(long id) {

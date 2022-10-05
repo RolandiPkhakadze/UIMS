@@ -19,8 +19,8 @@ public class DeportService {
         this.repository = repository;
     }
 
-    public List<Deport> getAllDeportsByUserId(final long userId) {
-        return repository.findDeportsByUserId(userId);
+    public List<Deport> getAllDeportsByUserPersonalNo(final String personalNo) {
+        return repository.findDeportsByUserPersonalNo(personalNo);
     }
 
     public Deport createDeport(final Deport deport) {

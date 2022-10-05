@@ -20,9 +20,9 @@ public class HealthCareController {
         this.service = service;
     }
 
-    @GetMapping("/user/{userId}")
-    public List<HealthCare> getAllHealthCareByUserId(@PathVariable(name = "userId") final long userId) {
-        return service.getAllHealthCareByUserId(userId);
+    @GetMapping("/user/{personalNo}")
+    public List<HealthCare> getAllHealthCareByUserPersonalNo(@PathVariable(name = "personalNo") final String personalNo) {
+        return service.getAllHealthCareByUserPersonalNo(personalNo);
     }
 
     @PostMapping

@@ -19,8 +19,8 @@ public class HealthCareService {
         this.repository = repository;
     }
 
-    public List<HealthCare> getAllHealthCareByUserId(final long userId) {
-        return repository.findHealthCaresByUserId(userId);
+    public List<HealthCare> getAllHealthCareByUserPersonalNo(final String personalNo) {
+        return repository.findHealthCaresByUserPersonalNo(personalNo);
     }
 
     public HealthCare createHealthCare(final HealthCare healthCare) {

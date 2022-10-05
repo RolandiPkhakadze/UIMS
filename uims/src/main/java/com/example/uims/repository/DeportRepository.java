@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface DeportRepository extends CrudRepository<Deport, Long> {
 
-    @Query("SELECT d FROM Deport d where d.migration.user.id = :userId")
-    List<Deport> findDeportsByUserId(long userId);
+    @Query("SELECT d FROM Deport d where d.migration.user.personalNo = :personalNo")
+    List<Deport> findDeportsByUserPersonalNo(String personalNo);
 }

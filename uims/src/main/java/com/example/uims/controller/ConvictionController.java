@@ -18,9 +18,9 @@ public class ConvictionController {
         this.service = service;
     }
 
-    @GetMapping("/user/{userId}")
-    public List<Conviction> getAllConvictionsByUserId(@PathVariable(name = "userId") final long userId) {
-        return service.getAllConvictionsByUserId(userId);
+    @GetMapping("/user/{personalNo}")
+    public List<Conviction> getAllConvictionsByUserPersonalNo(@PathVariable(name = "personalNo") final String personalNo) {
+        return service.getAllConvictionsByUserPersonalNo(personalNo);
     }
 
     @PostMapping

@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface HealthCareRepository extends CrudRepository<HealthCare, Long> {
-    List<HealthCare> findHealthCaresByUserId(long userId);
+    List<HealthCare> findHealthCaresByUserPersonalNo(String personalNo);
 }
