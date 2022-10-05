@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Employee Management System</title>
+    <meta charset="UTF-8">
+    <title>Home page</title>
 
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -12,7 +12,13 @@
 </head>
 <body>
 <div class="container my-2">
+    <a href="/users" class="btn btn-primary btn-sm mb-3">All Users</a>
 
+    <h2>Search User By Personal No</h2>
+    <form method="get" th:action="@{/users/personalNo}">
+        <input class="form-control mb-4 col-4" placeholder="Personal No" id="txtSearch" name="personalNo" type="text">
+        <button type="submit" class="btn btn-info col-2"> Search</button>
+    </form>
 </div>
 </body>
 </html>
