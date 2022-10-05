@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
@@ -20,11 +21,6 @@ public class UserController {
     public UserController(UserService service) {
         this.service = service;
     }
-
-//    @GetMapping
-//    public Iterable<User> findAllUsers() {
-//        return service.findAllUsers();
-//    }
 
     @GetMapping
     public String viewUsers(Model model){
@@ -41,9 +37,13 @@ public class UserController {
 
     @GetMapping("/personalNo")
     public String getUserByPersonalNo(Model model, final String personalNo) {
-        System.out.println("pers no is: " + personalNo);
-        model.addAttribute("user", service.getUserByPersonalNo(personalNo));
-
+        Optional<User> userOptional = service.getUserByPersonalNo(personalNo);
+        if(userOptional.isEmpty()){
+            String message = "User with given Personal No doesn't exists";
+            model.addAttribute("errorMessage", message);
+            return "index";
+        }
+        model.addAttribute("user", userOptional.get());
         return "user-page";
     }
 

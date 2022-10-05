@@ -15,9 +15,10 @@
     <a href="/users" class="btn btn-primary btn-sm mb-3">All Users</a>
 
     <h2>Search User By Personal No</h2>
+    <h6 th:text="${errorMessage}" class="text-danger"></h6>
     <form method="get" th:action="@{/users/personalNo}">
         <input class="form-control mb-4 col-4" placeholder="Personal No" id="txtSearch" name="personalNo" type="text">
-        <button type="submit" class="btn btn-info col-2"> Search</button>
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
 </body>
