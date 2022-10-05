@@ -4,6 +4,7 @@ import com.example.uims.entity.Migration;
 import com.example.uims.entity.User;
 import com.example.uims.exception.NotFoundException;
 import com.example.uims.repository.MigrationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class MigrationService {
 
     private final MigrationRepository repository;
 
+    @Autowired
     public MigrationService(MigrationRepository repository) {
         this.repository = repository;
     }

@@ -30,7 +30,7 @@ public class MigrationController {
         return service.getMigrationsByUser(userId);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public Migration getMigrationById(@PathVariable long id) {
         return service.getMigrationById(id);
     }
