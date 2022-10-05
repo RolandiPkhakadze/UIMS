@@ -3,6 +3,7 @@ package com.example.uims.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -20,6 +21,8 @@ public class Conviction {
     private long id;
     @Column(name = "description")
     private String description;
+    @Column(name = "date")
+    private LocalDate date;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
