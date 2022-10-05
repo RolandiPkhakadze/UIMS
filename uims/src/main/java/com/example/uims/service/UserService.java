@@ -32,13 +32,8 @@ public class UserService {
         return repository.save(user);
     }
 
-    public User getUserByPersonalNo(final String personalNo) {
-        Optional<User> userOptional = repository.findByPersonalNo(personalNo);
-        if (userOptional.isEmpty()) {
-            String exceptionMessage = String.format("User with personal no = %s no found", personalNo);
-            throw new NotFoundException(exceptionMessage);
-        }
-        return userOptional.get();
+    public Optional<User> getUserByPersonalNo(final String personalNo) {
+        return repository.findByPersonalNo(personalNo);
     }
 
     public User updateUser(final long id, final User user) {
