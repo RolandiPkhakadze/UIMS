@@ -39,9 +39,12 @@ public class UserController {
         return service.createUser(user);
     }
 
-    @GetMapping("/{personalNo}")
-    public User getUserByPersonalNo(@PathVariable(name = "personalNo") final String personalNo) {
-        return service.getUserByPersonalNo(personalNo);
+    @GetMapping("/personalNo")
+    public String getUserByPersonalNo(Model model, final String personalNo) {
+        System.out.println("pers no is: " + personalNo);
+        model.addAttribute("user", service.getUserByPersonalNo(personalNo));
+
+        return "user-page";
     }
 
     @PutMapping
