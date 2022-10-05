@@ -11,11 +11,12 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @ToString
 @Entity
+@Table(name = "transactions")
 public class Transaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_id_gen")
-    @SequenceGenerator(name = "transaction_id_gen", sequenceName = "transaction_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transactions_id_gen")
+    @SequenceGenerator(name = "transactions_id_gen", sequenceName = "transactions_id_seq", allocationSize = 1)
     private long id;
     @Column(name = "amount")
     private long amount;

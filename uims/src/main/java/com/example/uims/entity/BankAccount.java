@@ -15,11 +15,12 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 @Entity
+@Table(name = "bank_accounts")
 public class BankAccount {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_id_gen")
-    @SequenceGenerator(name = "account_id_gen", sequenceName = "account_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accounts_id_gen")
+    @SequenceGenerator(name = "accounts_id_gen", sequenceName = "accounts_id_seq", allocationSize = 1)
     private long id;
     @Column(name = "account_number")
     private String accountNumber;

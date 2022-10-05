@@ -13,11 +13,12 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @ToString
 @Entity
+@Table(name = "migrations")
 public class Migration {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "migration_id_gen")
-    @SequenceGenerator(name = "migration_id_gen", sequenceName = "migration_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "migrations_id_gen")
+    @SequenceGenerator(name = "migrations_id_gen", sequenceName = "migrations_id_seq", allocationSize = 1)
     private long id;
     @Column(name = "from_country")
     private String fromCountry;
