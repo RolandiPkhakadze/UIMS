@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Migrations</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+    <div class="container my-2">
+        <h1 th:text="'Migrations of ' + ${personFullName}"></h1>
+        <table class = "table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Hospital</th>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="migration : ${migrations}">
+                <td th:text="${migration.getFromCountry()}"></td>
+                <td th:text="${migration.getToCountry()}"></td>
+                <td th:text="${migration.getDate()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+</body>
+</html>
