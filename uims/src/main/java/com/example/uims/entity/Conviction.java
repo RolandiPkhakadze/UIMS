@@ -1,9 +1,10 @@
 package com.example.uims.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -22,7 +23,7 @@ public class Conviction {
     @Column(name = "description")
     private String description;
     @Column(name = "date")
-    private LocalDate date;
+    private Date date;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

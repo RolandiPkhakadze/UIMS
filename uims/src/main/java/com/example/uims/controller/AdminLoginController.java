@@ -14,7 +14,8 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/login")
-public class AdminLoginController {
+public class
+AdminLoginController {
 
     private final AdminLoginService service;
 
