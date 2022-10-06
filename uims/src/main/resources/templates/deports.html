@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deports</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+    <div class="container my-2">
+        <h1 th:text="'Deports of ' + ${personFullName}"></h1>
+        <table class = "table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="deport : ${deports}">
+                <td th:text="${deport.getMigration().getFromCountry()}"></td>
+                <td th:text="${deport.getMigration().getToCountry()}"></td>
+                <td th:text="${deport.getDescription()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+</body>
+</html>
