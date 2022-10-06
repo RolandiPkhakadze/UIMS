@@ -28,6 +28,7 @@ public class ConvictionController {
 
     @GetMapping("/user/{personalNo}")
     public String getAllConvictionsByUserPersonalNo(@PathVariable(name = "personalNo") final String personalNo, Model model) {
+        this.personalNo = personalNo;
         model.addAttribute("user", userService.getUserByPersonalNo(personalNo).get());
         model.addAttribute("convictions", service.getAllConvictionsByUserPersonalNo(personalNo));
         return "convictions";
@@ -39,18 +40,19 @@ public class ConvictionController {
     }
 
     @GetMapping("/user/{personalNo}/add_new_conviction")
-    public String getConvictionPage(@PathVariable String personalNo, Model model) {
+    public String getConvictionPage(@PathVariable(name = "personalNo") String personalNo) {
         this.personalNo = personalNo;
         return "add_new_conviction";
     }
 
     @PostMapping
-    public String createConviction(@ModelAttribute final Conviction conviction, Model model) {
+    public String createConviction(@ModelAttribute final Conviction conviction) {
         Optional<User> user = userService.getUserByPersonalNo(personalNo);
-        System.out.println(personalNo);
+        System.out.println("personal: " + personalNo);
         conviction.setUser(user.get());
         service.createConviction(conviction);
-        return "redirect:/conviction/user/" + personalNo;
+        System.out.println(String.format("redirect:/convictions/user/%s", personalNo));
+        return String.format("redirect:/convictions/user/%s", personalNo);
     }
 
     @GetMapping("/{id}")
