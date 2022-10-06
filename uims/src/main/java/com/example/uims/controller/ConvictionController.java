@@ -42,7 +42,7 @@ public class ConvictionController {
         return new Conviction();
     }
 
-    @GetMapping("/user/{personalNo}/add_new_conviction")
+    @GetMapping("/add_new_conviction/{personalNo}")
     public String getConvictionPage(@PathVariable(name = "personalNo") String personalNo) {
         this.personalNo = personalNo;
         return "add_new_conviction";
