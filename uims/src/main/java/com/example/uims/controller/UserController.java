@@ -5,11 +5,15 @@ import com.example.uims.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/users")
@@ -41,12 +45,26 @@ public class UserController {
     }
 
     @PostMapping
-    public String createUser(@ModelAttribute final User user) {
-        Optional<User> userOptional = service.createUser(user);
-        if (userOptional.isEmpty()) {
+    public String createUser(@ModelAttribute final User user, Model model) {
+        if(!isValidPersonalNo(user.getPersonalNo())){
+            model.addAttribute("errorMessage", "Not Valid Personal Number!");
             return "add_new_user";
         }
+        Optional<User> userOptional = service.createUser(user);
+        if (userOptional.isEmpty() ) {
+            return "add_new_user";
+        }
+
+
+
         return "redirect:/users";
+    }
+
+    private boolean isValidPersonalNo(String personalNo) {
+        String regex = "\\d{11}";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(personalNo);
+        return m.matches();
     }
 
     @GetMapping("/personalNo")
