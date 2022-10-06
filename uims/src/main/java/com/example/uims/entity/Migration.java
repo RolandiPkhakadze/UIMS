@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Past;
-import java.time.LocalDate;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class Migration {
     private String toCountry;
     @Column(name = "date")
     @Past
-    private LocalDate date;
+    private Date date;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
