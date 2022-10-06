@@ -36,6 +36,7 @@ public class HealthCareController {
         String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
         model.addAttribute("healthCares", service.getAllHealthCareByUserPersonalNo(personalNo));
         model.addAttribute("personFullName", fullName);
+        model.addAttribute("user", userService.getUserByPersonalNo(personalNo).get());
         return "health_care";
     }
 

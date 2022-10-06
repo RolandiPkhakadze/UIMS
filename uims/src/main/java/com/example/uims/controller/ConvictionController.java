@@ -29,7 +29,10 @@ public class ConvictionController {
     @GetMapping("/user/{personalNo}")
     public String getAllConvictionsByUserPersonalNo(@PathVariable(name = "personalNo") final String personalNo, Model model) {
         this.personalNo = personalNo;
+        User user = userService.getUserByPersonalNo(personalNo).get();
+        String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
         model.addAttribute("user", userService.getUserByPersonalNo(personalNo).get());
+        model.addAttribute("personFullName", fullName);
         model.addAttribute("convictions", service.getAllConvictionsByUserPersonalNo(personalNo));
         return "convictions";
     }
