@@ -24,12 +24,11 @@ public class UserService {
         return repository.findAll();
     }
 
-    public User createUser(final User user) {
+    public Optional<User> createUser(final User user) {
         if (repository.existsByPersonalNo(user.getPersonalNo())) {
-            String exceptionMessage = String.format("User with personal no = %s already exists", user.getPersonalNo());
-            throw new AlreadyExistsException(exceptionMessage);
+            return Optional.empty();
         }
-        return repository.save(user);
+        return Optional.of(repository.save(user));
     }
 
     public Optional<User> getUserByPersonalNo(final String personalNo) {

@@ -30,9 +30,23 @@ public class UserController {
         return "view_all_users";
     }
 
+    @GetMapping("/add-user")
+    public String getAddUserPage() {
+        return "add_new_user";
+    }
+
+    @ModelAttribute(name = "user")
+    public User user() {
+        return new User();
+    }
+
     @PostMapping
-    public User createUser(@RequestBody final User user) {
-        return service.createUser(user);
+    public String createUser(@ModelAttribute final User user) {
+        Optional<User> userOptional = service.createUser(user);
+        if (userOptional.isEmpty()) {
+            return "add_new_user";
+        }
+        return "redirect:/users";
     }
 
     @GetMapping("/personalNo")
