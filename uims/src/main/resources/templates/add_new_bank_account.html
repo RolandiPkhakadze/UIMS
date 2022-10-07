@@ -19,9 +19,10 @@
             <h3 class="text-center my-5 text-secondary">Add Bank Account</h3>
             <form method="post" th:action="@{/bank-accounts}" th:object="${bankAccount}" class="px-md-2">
                 <div class="form-outline mb-4">
-                    <label class="form-label">Account Number</label>
+                    <label class="form-label">Account Number (12 digits)</label>
                     <input type="text" th:field="*{accountNumber}" id="accountNumber" class="form-control"
                            placeholder="Account Number" required/>
+                    <h6 th:text="${errorMessage}" class="text-danger"></h6>
                 </div>
 
                 <div class="form-outline mb-4">

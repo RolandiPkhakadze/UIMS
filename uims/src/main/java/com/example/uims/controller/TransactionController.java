@@ -95,15 +95,15 @@ public class TransactionController {
             return String.format("redirect:/transactions/user/%s", personalNo);
         }
 
-        String errorMessage = "Given Account Numbers are invalid, or none of them belongs to the User!";
+        String errorMessage = "Given Account Numbers are invalid, they are same, or none of them belongs to the User!";
         model.addAttribute("errorMessage", errorMessage);
         return "add_transaction";
     }
 
     private boolean validBankAccounts(BankAccount fromAcc, BankAccount toAcc, List<BankAccount> userAccounts) {
         if(fromAcc == null || toAcc == null) return false;
-        return userAccounts.contains(fromAcc) ||
-                userAccounts.contains(toAcc);
+        return (userAccounts.contains(fromAcc) ||
+                userAccounts.contains(toAcc)) && !(toAcc.getAccountNumber().equals(fromAcc.getAccountNumber()));
     }
 
     @GetMapping("/description/{id}")
