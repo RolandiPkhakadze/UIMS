@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class BankAccount {
     @Column(name = "account_number")
     private String accountNumber;
     @Column(name = "expiration_date")
-    @Future
-    private LocalDate expirationDate;
+   // @Future
+    private Date expirationDate;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

@@ -58,7 +58,6 @@ public class ConvictionController {
     @PostMapping
     public String createConviction(@ModelAttribute final Conviction conviction) {
         Optional<User> user = userService.getUserByPersonalNo(personalNo);
-        System.out.println("personal: " + personalNo);
         conviction.setUser(user.get());
         service.createConviction(conviction);
         System.out.println(String.format("redirect:/convictions/user/%s", personalNo));
