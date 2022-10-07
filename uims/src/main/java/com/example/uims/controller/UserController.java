@@ -70,12 +70,15 @@ public class UserController {
     @GetMapping("/personalNo")
     public String getUserByPersonalNo(Model model, final String personalNo) {
         Optional<User> userOptional = service.getUserByPersonalNo(personalNo);
+
         if(userOptional.isEmpty()){
             String message = "User with given Personal No doesn't exists";
             model.addAttribute("errorMessage", message);
             return "index";
         }
         model.addAttribute("user", userOptional.get());
+        String fullName = String.format("%s %s", userOptional.get().getFirstName(), userOptional.get().getLastName());
+        model.addAttribute("personFullName", fullName);
         return "user-page";
     }
 
