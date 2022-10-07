@@ -30,6 +30,7 @@
   <br>
   <a th:href="'/bank-accounts/add-bank-account/' + ${user.getPersonalNo()}" class="btn btn-primary btn-sm mb-3">Add Bank Account</a>
   <a th:href="'/users/personalNo?personalNo=' + ${user.getPersonalNo()}" class="btn btn-primary btn-sm mb-3">View User</a>
+  <h6 th:text="${noPermission}" class="text-danger"></h6>
 </div>
 </body>
 </html>

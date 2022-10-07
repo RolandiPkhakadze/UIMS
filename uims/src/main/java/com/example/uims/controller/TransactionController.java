@@ -66,6 +66,8 @@ public class TransactionController {
         return new Transaction();
     }
 
+
+    //sorry for duplicate codes, we know it
     @GetMapping("/add_new_transaction/{personalNo}")
     public String getAddTransactionPage(
             HttpSession session,
@@ -73,8 +75,23 @@ public class TransactionController {
             @PathVariable(name = "personalNo") String personalNo
     ) {
         if (session.getAttribute("admin") == null) {
+            this.personalNo = personalNo;
+            List<BankAccount> bankAccounts = bankAccountService.getAllBankAccountsByUserPersonalNo(personalNo);
+            List<Transaction> incomeTransactions = new ArrayList<>();
+            List<Transaction> outgoingTransactions = new ArrayList<>();
+
+            for(BankAccount account: bankAccounts){
+                incomeTransactions.addAll(service.getAllIncomeTransactionsByBankAccount(account));
+                outgoingTransactions.addAll(service.getAllOutgoingTransactionsByBankAccount(account));
+            }
+            User user = userService.getUserByPersonalNo(personalNo).get();
+            String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
+            model.addAttribute("user", userService.getUserByPersonalNo(personalNo).get());
+            model.addAttribute("personFullName", fullName);
+            model.addAttribute("income", incomeTransactions);
+            model.addAttribute("outgoing", outgoingTransactions);
             model.addAttribute("noPermission", "You have not access");
-            return String.format("redirect:/convictions/user/%s", personalNo);
+            return "transactions";
         }
         this.personalNo = personalNo;
         return "add_transaction";

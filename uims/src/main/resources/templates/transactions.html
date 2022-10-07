@@ -59,6 +59,7 @@
 
     <a th:href="'/transactions/add_new_transaction/' + ${user.getPersonalNo()}" class="btn btn-primary btn-sm mb-3">Add Transaction</a>
     <a th:href="'/users/personalNo?personalNo=' + ${user.getPersonalNo()}" class="btn btn-primary btn-sm mb-3">View User</a>
+    <h6 th:text="${noPermission}" class="text-danger"></h6>
 </div>
 </body>
 </html>

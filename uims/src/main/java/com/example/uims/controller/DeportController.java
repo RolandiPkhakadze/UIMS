@@ -45,13 +45,21 @@ public class DeportController {
         return "deports";
     }
 
+    //sorry for duplicate codes, we know it
     @GetMapping("/add-deport/{personalNo}")
     public String getAddDeportPage(
             HttpSession session,
-            @PathVariable(name = "personalNo") String personalNo
+            @PathVariable(name = "personalNo") String personalNo,
+            Model model
     ) {
         if (session.getAttribute("admin") == null) {
-            return String.format("redirect:/deports/user/%s", personalNo);
+            User user = userService.getUserByPersonalNo(personalNo).get();
+            String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
+            model.addAttribute("user", userService.getUserByPersonalNo(personalNo).get());
+            model.addAttribute("deports", service.getAllDeportsByUserPersonalNo(personalNo));
+            model.addAttribute("personFullName", fullName);
+            model.addAttribute("noPermission", "You have not access");
+            return "deports";
         }
         this.personalNo = personalNo;
         return "add_new_deport";

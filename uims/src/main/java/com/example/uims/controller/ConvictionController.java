@@ -34,7 +34,7 @@ public class ConvictionController {
         this.personalNo = personalNo;
         User user = userService.getUserByPersonalNo(personalNo).get();
         String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
-        model.addAttribute("user", userService.getUserByPersonalNo(personalNo).get());
+        model.addAttribute("user", user);
         model.addAttribute("personFullName", fullName);
         model.addAttribute("convictions", service.getAllConvictionsByUserPersonalNo(personalNo));
         return "convictions";
@@ -45,6 +45,7 @@ public class ConvictionController {
         return new Conviction();
     }
 
+    //sorry for duplicate codes, we know it
     @GetMapping("/add_new_conviction/{personalNo}")
     public String getAddConvictionPage(
             HttpSession session,
@@ -53,8 +54,13 @@ public class ConvictionController {
     ) {
 
         if (session.getAttribute("admin") == null) {
+            User user = userService.getUserByPersonalNo(personalNo).get();
+            String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
+            model.addAttribute("user", user);
+            model.addAttribute("personFullName", fullName);
+            model.addAttribute("convictions", service.getAllConvictionsByUserPersonalNo(personalNo));
             model.addAttribute("noPermission", "You have not access");
-            return String.format("redirect:/convictions/user/%s", personalNo);
+            return "convictions";
         }
         this.personalNo = personalNo;
         return "add_new_conviction";

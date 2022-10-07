@@ -44,12 +44,20 @@ public class BankAccountController {
         return "bank_accounts";
     }
 
+    //sorry for duplicate codes, we know it
     @GetMapping("/add-bank-account/{personalNo}")
     public String getAddBankAccountPage(
             @PathVariable(name = "personalNo") String personalNo,
-            HttpSession session) {
+            HttpSession session,
+            Model model) {
         if (session.getAttribute("admin") == null) {
-            return String.format("redirect:/bank-accounts/user/%s", personalNo);
+            User user = userService.getUserByPersonalNo(personalNo).get();
+            String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
+            model.addAttribute("accounts", service.getAllBankAccountsByUserPersonalNo(personalNo));
+            model.addAttribute("personFullName", fullName);
+            model.addAttribute("user", userService.getUserByPersonalNo(personalNo).get());
+            model.addAttribute("noPermission", "You have not access");
+            return "bank_accounts";
         }
         this.personalNo = personalNo;
         return "add_new_bank_account";

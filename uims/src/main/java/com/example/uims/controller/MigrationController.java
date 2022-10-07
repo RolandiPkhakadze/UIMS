@@ -40,13 +40,21 @@ public class MigrationController {
         return "migrations";
     }
 
+    //sorry for duplicate codes, we know it
     @GetMapping("/add-migration/{personalNo}")
     public String getAddMigrationPage(
             HttpSession session,
-            @PathVariable(name = "personalNo") String personalNo
+            @PathVariable(name = "personalNo") String personalNo,
+            Model model
     ) {
         if (session.getAttribute("admin") == null) {
-            return String.format("redirect:/migrations/user/%s", personalNo);
+            User user = userService.getUserByPersonalNo(personalNo).get();
+            String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
+            model.addAttribute("user", user);
+            model.addAttribute("migrations", service.getMigrationsByUserPersonalNo(personalNo));
+            model.addAttribute("personFullName", fullName);
+            model.addAttribute("noPermission", "You have not access");
+            return "migrations";
         }
         this.personalNo = personalNo;
         return "add_migration";

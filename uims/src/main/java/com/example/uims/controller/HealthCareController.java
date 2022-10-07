@@ -5,6 +5,7 @@ import com.example.uims.entity.User;
 import com.example.uims.service.HealthCareService;
 import com.example.uims.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,13 +42,21 @@ public class HealthCareController {
         return "health_care";
     }
 
+    //sorry for duplicate codes, we know it
     @GetMapping("/add-health-care/{personalNo}")
     public String getAddHealthCarePage(
             HttpSession session,
-            @PathVariable(name = "personalNo") String personalNo
+            @PathVariable(name = "personalNo") String personalNo,
+            Model model
     ) {
         if (session.getAttribute("admin") == null) {
-            return String.format("redirect:/health-care/user/%s", personalNo);
+            User user = userService.getUserByPersonalNo(personalNo).get();
+            String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
+            model.addAttribute("healthCares", service.getAllHealthCareByUserPersonalNo(personalNo));
+            model.addAttribute("personFullName", fullName);
+            model.addAttribute("user", userService.getUserByPersonalNo(personalNo).get());
+            model.addAttribute("noPermission", "You have not access");
+            return "health_care";
         }
         this.personalNo = personalNo;
         return "add_new_healthcare";
