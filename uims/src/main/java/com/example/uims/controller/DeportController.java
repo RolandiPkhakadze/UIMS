@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.Optional;
 
@@ -44,7 +45,13 @@ public class DeportController {
     }
 
     @GetMapping("/add-deport/{personalNo}")
-    public String getAddDeportPage(@PathVariable(name = "personalNo") String personalNo) {
+    public String getAddDeportPage(
+            HttpSession session,
+            @PathVariable(name = "personalNo") String personalNo
+    ) {
+        if (session.getAttribute("admin") == null) {
+            return "index";
+        }
         this.personalNo = personalNo;
         return "add_new_deport";
     }

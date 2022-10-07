@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 
@@ -41,7 +42,13 @@ public class HealthCareController {
     }
 
     @GetMapping("/add-health-care/{personalNo}")
-    public String getAddHealthCarePage(@PathVariable(name = "personalNo") String personalNo) {
+    public String getAddHealthCarePage(
+            HttpSession session,
+            @PathVariable(name = "personalNo") String personalNo
+    ) {
+        if (session.getAttribute("admin") == null) {
+            return "index";
+        }
         this.personalNo = personalNo;
         return "add_new_healthcare";
     }

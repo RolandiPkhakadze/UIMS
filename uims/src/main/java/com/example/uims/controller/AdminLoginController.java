@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Controller
@@ -32,6 +33,7 @@ AdminLoginController {
     @PostMapping
     public String login(
             Model model,
+            HttpSession session,
             @RequestParam(value = "username") final String username,
             @RequestParam(value = "password") final String password
     ) {
@@ -41,6 +43,7 @@ AdminLoginController {
             model.addAttribute("errorMessage", errorMessage);
             return "login";
         }
-        return "view_all_users";
+        session.setAttribute("admin", adminOptional.get());
+        return "redirect:/users";
     }
 }

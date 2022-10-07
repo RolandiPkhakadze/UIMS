@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 
@@ -43,7 +44,13 @@ public class ConvictionController {
     }
 
     @GetMapping("/add_new_conviction/{personalNo}")
-    public String getConvictionPage(@PathVariable(name = "personalNo") String personalNo) {
+    public String getAddConvictionPage(
+            HttpSession session,
+            @PathVariable(name = "personalNo") String personalNo
+    ) {
+        if (session.getAttribute("admin") == null) {
+            return "index";
+        }
         this.personalNo = personalNo;
         return "add_new_conviction";
     }

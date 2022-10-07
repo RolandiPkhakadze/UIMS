@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,10 @@ public class UserController {
     }
 
     @GetMapping
-    public String viewUsers(Model model){
+    public String viewUsers(Model model, HttpSession session){
+        if (session.getAttribute("admin") == null) {
+            return "index";
+        }
         List<User> users = new ArrayList<>();
         service.findAllUsers().forEach(users::add);
         model.addAttribute("allUsers", users);
@@ -35,7 +39,10 @@ public class UserController {
     }
 
     @GetMapping("/add-user")
-    public String getAddUserPage() {
+    public String getAddUserPage(HttpSession session) {
+        if (session.getAttribute("admin") == null) {
+            return "index";
+        }
         return "add_new_user";
     }
 

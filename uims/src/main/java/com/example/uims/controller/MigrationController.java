@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Controller
@@ -39,7 +40,13 @@ public class MigrationController {
     }
 
     @GetMapping("/add-migration/{personalNo}")
-    public String getAddMigrationPage(@PathVariable(name = "personalNo") String personalNo) {
+    public String getAddMigrationPage(
+            HttpSession session,
+            @PathVariable(name = "personalNo") String personalNo
+    ) {
+        if (session.getAttribute("admin") == null) {
+            return "index";
+        }
         this.personalNo = personalNo;
         return "add_migration";
     }
