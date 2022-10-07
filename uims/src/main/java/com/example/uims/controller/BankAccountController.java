@@ -73,6 +73,8 @@ public class BankAccountController {
     @PostMapping
     public String createBankAccount(@ModelAttribute final BankAccount bankAccount, Model model) {
         if(!validBankAccount(bankAccount)){
+            User user = userService.getUserByPersonalNo(personalNo).get();
+            model.addAttribute("user", user);
             model.addAttribute("errorMessage", "Account Number is invalid or already taken!");
             return "add_new_bank_account";
         }
