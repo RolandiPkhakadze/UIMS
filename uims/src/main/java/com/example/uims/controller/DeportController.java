@@ -52,10 +52,12 @@ public class DeportController {
             @PathVariable(name = "personalNo") String personalNo,
             Model model
     ) {
+
+        User user = userService.getUserByPersonalNo(personalNo).get();
+        model.addAttribute("user", user);
+
         if (session.getAttribute("admin") == null) {
-            User user = userService.getUserByPersonalNo(personalNo).get();
             String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
-            model.addAttribute("user", userService.getUserByPersonalNo(personalNo).get());
             model.addAttribute("deports", service.getAllDeportsByUserPersonalNo(personalNo));
             model.addAttribute("personFullName", fullName);
             model.addAttribute("noPermission", "You have not access");

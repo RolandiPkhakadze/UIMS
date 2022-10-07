@@ -50,12 +50,14 @@ public class BankAccountController {
             @PathVariable(name = "personalNo") String personalNo,
             HttpSession session,
             Model model) {
+
+        User user = userService.getUserByPersonalNo(personalNo).get();
+        model.addAttribute("user", user);
+
         if (session.getAttribute("admin") == null) {
-            User user = userService.getUserByPersonalNo(personalNo).get();
             String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
             model.addAttribute("accounts", service.getAllBankAccountsByUserPersonalNo(personalNo));
             model.addAttribute("personFullName", fullName);
-            model.addAttribute("user", userService.getUserByPersonalNo(personalNo).get());
             model.addAttribute("noPermission", "You have not access");
             return "bank_accounts";
         }

@@ -14,6 +14,9 @@
 </head>
 <body>
 <section class="container-fluid">
+    <br>
+    &nbsp;&nbsp;&nbsp;
+    <a th:href="'/transactions/user/' + ${user.getPersonalNo()}" class="btn btn-primary btn-sm mb-3">Transactions</a>
     <div class="row justify-content-center py-5">
         <div class="col-6 rounded-3 my-form-container">
             <h3 class="text-center my-5 text-secondary">Add New Transaction</h3>

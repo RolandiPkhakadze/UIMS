@@ -14,7 +14,11 @@
 </head>
 <body>
 <section class="container-fluid">
+    <br>
+    &nbsp;&nbsp;
+    <a th:href="'/health-care/user/' + ${user.getPersonalNo()}" class="btn btn-primary btn-sm mb-3">Health Cares</a>&nbsp;
     <div class="row justify-content-center py-5">
+
         <div class="col-6 rounded-3 my-form-container">
             <h3 class="text-center my-5 text-secondary">Add Health Care</h3>
             <form method="post" th:action="@{/health-care}" th:object="${healthCare}" class="px-md-2">

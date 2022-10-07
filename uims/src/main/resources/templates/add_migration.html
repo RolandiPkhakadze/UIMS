@@ -14,9 +14,12 @@
 </head>
 <body>
     <section class="container-fluid">
+        <br>
+        &nbsp;&nbsp;&nbsp;
+        <a th:href="'/migrations/user/' + ${user.getPersonalNo()}" class="btn btn-primary btn-sm mb-3">Migrations</a>
         <div class="row justify-content-center py-5">
             <div class="col-6 rounded-3 my-form-container">
-                <h3 class="text-center my-5 text-secondary">Add Health Care</h3>
+                <h3 class="text-center my-5 text-secondary">Add Migration</h3>
                 <form method="post" th:action="@{/migrations}" th:object="${migration}" class="px-md-2">
                     <div class="form-outline mb-4">
                         <label class="form-label">From</label>

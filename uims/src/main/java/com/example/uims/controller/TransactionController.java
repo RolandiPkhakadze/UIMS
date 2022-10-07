@@ -74,6 +74,10 @@ public class TransactionController {
             Model model,
             @PathVariable(name = "personalNo") String personalNo
     ) {
+
+        User user = userService.getUserByPersonalNo(personalNo).get();
+        model.addAttribute("user", user);
+
         if (session.getAttribute("admin") == null) {
             this.personalNo = personalNo;
             List<BankAccount> bankAccounts = bankAccountService.getAllBankAccountsByUserPersonalNo(personalNo);
@@ -84,9 +88,8 @@ public class TransactionController {
                 incomeTransactions.addAll(service.getAllIncomeTransactionsByBankAccount(account));
                 outgoingTransactions.addAll(service.getAllOutgoingTransactionsByBankAccount(account));
             }
-            User user = userService.getUserByPersonalNo(personalNo).get();
+
             String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
-            model.addAttribute("user", userService.getUserByPersonalNo(personalNo).get());
             model.addAttribute("personFullName", fullName);
             model.addAttribute("income", incomeTransactions);
             model.addAttribute("outgoing", outgoingTransactions);
