@@ -39,6 +39,7 @@ public class DeportController {
         this.personalNo = personalNo;
         User user = userService.getUserByPersonalNo(personalNo).get();
         String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
+        model.addAttribute("user", userService.getUserByPersonalNo(personalNo).get());
         model.addAttribute("deports", service.getAllDeportsByUserPersonalNo(personalNo));
         model.addAttribute("personFullName", fullName);
         return "deports";
@@ -50,7 +51,7 @@ public class DeportController {
             @PathVariable(name = "personalNo") String personalNo
     ) {
         if (session.getAttribute("admin") == null) {
-            return "index";
+            return String.format("redirect:/deports/user/%s", personalNo);
         }
         this.personalNo = personalNo;
         return "add_new_deport";

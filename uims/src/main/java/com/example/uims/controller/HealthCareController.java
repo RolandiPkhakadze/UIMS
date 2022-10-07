@@ -47,7 +47,7 @@ public class HealthCareController {
             @PathVariable(name = "personalNo") String personalNo
     ) {
         if (session.getAttribute("admin") == null) {
-            return "index";
+            return String.format("redirect:/health-care/user/%s", personalNo);
         }
         this.personalNo = personalNo;
         return "add_new_healthcare";

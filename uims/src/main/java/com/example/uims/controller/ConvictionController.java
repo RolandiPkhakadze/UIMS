@@ -28,7 +28,9 @@ public class ConvictionController {
     }
 
     @GetMapping("/user/{personalNo}")
-    public String getAllConvictionsByUserPersonalNo(@PathVariable(name = "personalNo") final String personalNo, Model model) {
+    public String getAllConvictionsByUserPersonalNo(
+            @PathVariable(name = "personalNo") final String personalNo,
+            Model model) {
         this.personalNo = personalNo;
         User user = userService.getUserByPersonalNo(personalNo).get();
         String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
@@ -52,7 +54,7 @@ public class ConvictionController {
 
         if (session.getAttribute("admin") == null) {
             model.addAttribute("noPermission", "You have not access");
-            return String.format("redirect/convictions/user/%s", personalNo);
+            return String.format("redirect:/convictions/user/%s", personalNo);
         }
         this.personalNo = personalNo;
         return "add_new_conviction";

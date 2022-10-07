@@ -34,6 +34,7 @@ public class MigrationController {
         this.personalNo = personalNo;
         User user = userService.getUserByPersonalNo(personalNo).get();
         String fullName = String.format("%s %s", user.getFirstName(), user.getLastName());
+        model.addAttribute("user", user);
         model.addAttribute("migrations", service.getMigrationsByUserPersonalNo(personalNo));
         model.addAttribute("personFullName", fullName);
         return "migrations";
@@ -45,7 +46,7 @@ public class MigrationController {
             @PathVariable(name = "personalNo") String personalNo
     ) {
         if (session.getAttribute("admin") == null) {
-            return "index";
+            return String.format("redirect:/migrations/user/%s", personalNo);
         }
         this.personalNo = personalNo;
         return "add_migration";

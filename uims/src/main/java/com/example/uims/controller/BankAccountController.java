@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +43,12 @@ public class BankAccountController {
     }
 
     @GetMapping("/add-bank-account/{personalNo}")
-    public String getAddBankAccountPage(@PathVariable(name = "personalNo") String personalNo) {
+    public String getAddBankAccountPage(
+            @PathVariable(name = "personalNo") String personalNo,
+            HttpSession session) {
+        if (session.getAttribute("admin") == null) {
+            return String.format("redirect:/bank-accounts/user/%s", personalNo);
+        }
         this.personalNo = personalNo;
         return "add_new_bank_account";
     }

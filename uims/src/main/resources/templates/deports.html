@@ -28,6 +28,9 @@
             </tr>
             </tbody>
         </table>
+        <a th:href="'/deports/add-deport/' + ${user.getPersonalNo()}" class="btn btn-primary btn-sm mb-3">Add Deport</a>
+        <a th:href="'/users/personalNo?personalNo=' + ${user.getPersonalNo()}" class="btn btn-primary btn-sm mb-3">View User</a>
+
         <br>
     </div>
 </body>

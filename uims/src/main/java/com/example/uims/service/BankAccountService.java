@@ -29,10 +29,7 @@ public class BankAccountService {
 
     public BankAccount getBankAccountByAccountNumber(String accountNumber) {
         Optional<BankAccount> bankAccount = repository.findByAccountNumber(accountNumber);
-        if(bankAccount.isEmpty()) {
-            String message = String.format("Bank Account by account number = %s not found", accountNumber);
-            throw new NotFoundException(message);
-        }
+        if(bankAccount.isEmpty()) return null;
         return bankAccount.get();
     }
 }
