@@ -30,6 +30,7 @@ public class UserController {
     @GetMapping
     public String viewUsers(Model model, HttpSession session){
         if (session.getAttribute("admin") == null) {
+            model.addAttribute("noPermission", "You have not access");
             return "index";
         }
         List<User> users = new ArrayList<>();

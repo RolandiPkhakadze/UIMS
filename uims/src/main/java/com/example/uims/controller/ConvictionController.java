@@ -46,10 +46,13 @@ public class ConvictionController {
     @GetMapping("/add_new_conviction/{personalNo}")
     public String getAddConvictionPage(
             HttpSession session,
+            Model model,
             @PathVariable(name = "personalNo") String personalNo
     ) {
+
         if (session.getAttribute("admin") == null) {
-            return "index";
+            model.addAttribute("noPermission", "You have not access");
+            return String.format("redirect/convictions/user/%s", personalNo);
         }
         this.personalNo = personalNo;
         return "add_new_conviction";
