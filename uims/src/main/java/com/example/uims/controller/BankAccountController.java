@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/bank-accounts")
@@ -59,13 +61,24 @@ public class BankAccountController {
     }
 
     @PostMapping
-    public String createBankAccount(@ModelAttribute final BankAccount bankAccount) {
-        System.out.println("acc num: " + bankAccount.getAccountNumber());
+    public String createBankAccount(@ModelAttribute final BankAccount bankAccount, Model model) {
+        if(!validBankAccount(bankAccount)){
+            model.addAttribute("errorMessage", "Account Number is invalid or already taken!");
+            return "add_new_bank_account";
+        }
         Optional<User> userOptional = userService.getUserByPersonalNo(personalNo);
         bankAccount.setUser(userOptional.get());
         System.out.println("acc num: " + bankAccount.getAccountNumber());
         service.createBankAccount(bankAccount);
         return String.format("redirect:/bank-accounts/user/%s", personalNo);
+    }
+
+    private boolean validBankAccount(BankAccount bankAccount) {
+        String regex = "\\d{12}";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(bankAccount.getAccountNumber());
+
+        return m.matches() && (service.getBankAccountByAccountNumber(bankAccount.getAccountNumber()) == null);
     }
 
     @GetMapping("/{accountNumber}")

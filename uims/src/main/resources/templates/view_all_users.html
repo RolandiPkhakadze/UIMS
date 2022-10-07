@@ -12,6 +12,7 @@
 </head>
 <body>
 <div class="container my-2">
+    <a href="/" class="btn btn-primary">Home Page</a>
     <h1>All Users List</h1>
     <table class = "table table-striped table-responsive-md">
         <thead>
@@ -20,14 +21,16 @@
             <th>Last Name</th>
             <th>Personal No</th>
             <th>Address</th>
+            <th>Visit</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="user : ${allUsers}">
             <td th:text="${user.getFirstName()}"></td>
-            <td th:text="${user.getLastName()}"></td>
+            <td th:text="${user.getLastName()}" ></td>
             <td th:text="${user.getPersonalNo()}"></td>
             <td th:text="${user.getAddress()}"></td>
+            <td> <a th:href="'/users/personalNo?personalNo=' + ${user.getPersonalNo()}" class="btn btn-primary btn-sm mb-3"> Visit</a> </td>
         </tr>
         </tbody>
     </table>
